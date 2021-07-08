@@ -32,29 +32,53 @@
 
 			embedded_svc.settings.enabledFeatures = ['LiveAgent'];
 			embedded_svc.settings.entryFeature = 'LiveAgent';
-			embedded_svc.settings.extraPrechatInfo = [{
-				"entityFieldMaps": [{
-			    "doCreate":false,
-			    "doFind":true,
-			    "fieldName":"LastName",
-			    "isExactMatch":true,
-			    "label":"Last Name"
-			  }, {
-			    "doCreate":false,
-			    "doFind":true,
-			    "fieldName":"FirstName",
-			    "isExactMatch":true,
-			    "label":"First Name"
-			  }, {
-			    "doCreate":false,
-			    "doFind":true,
-			    "fieldName":"Email",
-			    "isExactMatch":true,
-			    "label":"Email"
-			  }],
-			  "entityName":"Contact"
-			}];
-
+			embedded_svc.snippetSettingsFile.extraPrechatFormDetails = [{
+		    "label":"IČO",
+		    "transcriptFields":[ "Tax_ID__c" ],
+		    "displayToAgent":true
+		},{
+		    "label":"Název společnosti",
+		    "transcriptFields":[ "Company_Name__c" ],
+		    "displayToAgent":true
+		},{
+		    "label":"Jméno",
+		    "transcriptFields":[ "First_Name__c" ],
+		    "displayToAgent":true
+		},{
+		    "label":"Příjmení",
+		    "transcriptFields":[ "Last_Name__c" ],
+		    "displayToAgent":true
+		}];
+		embedded_svc.snippetSettingsFile.extraPrechatInfo = [
+		    {
+		      "entityFieldMaps": [{
+			"doCreate":false,
+			"doFind":true,
+			"fieldName":"LastName",
+			"isExactMatch":true,
+			"label":"Příjmení"
+		      }, {
+			"doCreate":false,
+			"doFind":true,
+			"fieldName":"FirstName",
+			"isExactMatch":true,
+			"label":"Jméno"
+		      }],
+		      "entityName":"Contact",
+		      "linkToEntityField" : "ContactId"
+		    },
+		    {
+		      "entityFieldMaps": [{
+			"doCreate":false,
+			"doFind":true,
+			"fieldName":"CCS_Company_ID__c",
+			"isExactMatch":true,
+			"label":"IČO"
+		      }],
+		      "entityName":"Account",
+		      "saveToTranscript" : "AccountId"
+		    }
+		];
 			embedded_svc.init(
 				'https://fleetcor-eu--dev035.my.salesforce.com',
 				'https://dev035-e2efleetcor.cs189.force.com',
